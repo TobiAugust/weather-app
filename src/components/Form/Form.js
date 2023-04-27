@@ -1,18 +1,17 @@
-function formData(event) {
-  event.preventDefault();
-  const form = new FormData(event.target);
-  const data = Object.fromEntries(form);
-  const formElements = event.target.elements;
-  const dataClean = {
-    name: data.name,
-    isForGoodWeather: formElements.goodWeather.checked,
-  };
-  event.target.reset();
-  formElements.name.focus();
-  return dataClean;
-}
-
 export default function Form({ onAddActivity }) {
+  function formData(event) {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    const data = Object.fromEntries(form);
+    const formElements = event.target.elements;
+    const dataClean = {
+      name: data.name,
+      isForGoodWeather: formElements.goodWeather.checked,
+    };
+    event.target.reset();
+    formElements.name.focus();
+    onAddActivity(dataClean);
+  }
   return (
     <form onSubmit={formData}>
       <h2>Add New Activity:</h2>
